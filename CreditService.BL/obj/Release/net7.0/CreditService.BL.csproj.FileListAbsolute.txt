@@ -1,0 +1,17 @@
+D:\RiderProjects\WebApplication1\CreditService.BL\bin\Release\net7.0\CreditService.BL.deps.json
+D:\RiderProjects\WebApplication1\CreditService.BL\bin\Release\net7.0\CreditService.BL.dll
+D:\RiderProjects\WebApplication1\CreditService.BL\bin\Release\net7.0\CreditService.BL.pdb
+D:\RiderProjects\WebApplication1\CreditService.BL\bin\Release\net7.0\CreditService.Common.dll
+D:\RiderProjects\WebApplication1\CreditService.BL\bin\Release\net7.0\CreditService.DAL.dll
+D:\RiderProjects\WebApplication1\CreditService.BL\bin\Release\net7.0\CreditService.Common.pdb
+D:\RiderProjects\WebApplication1\CreditService.BL\bin\Release\net7.0\CreditService.DAL.pdb
+D:\RiderProjects\WebApplication1\CreditService.BL\obj\Release\net7.0\CreditService.BL.csproj.AssemblyReference.cache
+D:\RiderProjects\WebApplication1\CreditService.BL\obj\Release\net7.0\CreditService.BL.GeneratedMSBuildEditorConfig.editorconfig
+D:\RiderProjects\WebApplication1\CreditService.BL\obj\Release\net7.0\CreditService.BL.AssemblyInfoInputs.cache
+D:\RiderProjects\WebApplication1\CreditService.BL\obj\Release\net7.0\CreditService.BL.AssemblyInfo.cs
+D:\RiderProjects\WebApplication1\CreditService.BL\obj\Release\net7.0\CreditService.BL.csproj.CoreCompileInputs.cache
+D:\RiderProjects\WebApplication1\CreditService.BL\obj\Release\net7.0\CreditService.BL.csproj.CopyComplete
+D:\RiderProjects\WebApplication1\CreditService.BL\obj\Release\net7.0\CreditService.BL.dll
+D:\RiderProjects\WebApplication1\CreditService.BL\obj\Release\net7.0\refint\CreditService.BL.dll
+D:\RiderProjects\WebApplication1\CreditService.BL\obj\Release\net7.0\CreditService.BL.pdb
+D:\RiderProjects\WebApplication1\CreditService.BL\obj\Release\net7.0\ref\CreditService.BL.dll

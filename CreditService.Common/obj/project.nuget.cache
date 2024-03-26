@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "3JAuTZQdAT7v8lv4E6SvzfK5cEnz28euq3qSjzLfvgNcZFcUfo/pAnRWHSxTYcVKA4AtOe23Fd1GGOacKYeecQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\AbramovNH\\RiderProjects\\WebApplication1\\CreditService.Common\\CreditService.Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.16\\microsoft.aspnetcore.openapi.7.0.16.nupkg.sha512",
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.16\\microsoft.netcore.app.ref.7.0.16.nupkg.sha512",
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.16\\microsoft.windowsdesktop.app.ref.7.0.16.nupkg.sha512",
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.16\\microsoft.aspnetcore.app.ref.7.0.16.nupkg.sha512"
+  ],
+  "logs": []
+}

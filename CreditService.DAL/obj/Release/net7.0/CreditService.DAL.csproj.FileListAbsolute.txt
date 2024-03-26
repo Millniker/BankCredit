@@ -1,0 +1,17 @@
+D:\RiderProjects\WebApplication1\CreditService.DAL\bin\Release\net7.0\CreditService.DAL.deps.json
+D:\RiderProjects\WebApplication1\CreditService.DAL\bin\Release\net7.0\CreditService.DAL.runtimeconfig.json
+D:\RiderProjects\WebApplication1\CreditService.DAL\bin\Release\net7.0\CreditService.DAL.dll
+D:\RiderProjects\WebApplication1\CreditService.DAL\bin\Release\net7.0\CreditService.DAL.pdb
+D:\RiderProjects\WebApplication1\CreditService.DAL\bin\Release\net7.0\CreditService.Common.dll
+D:\RiderProjects\WebApplication1\CreditService.DAL\bin\Release\net7.0\CreditService.Common.pdb
+D:\RiderProjects\WebApplication1\CreditService.DAL\obj\Release\net7.0\CreditService.DAL.csproj.AssemblyReference.cache
+D:\RiderProjects\WebApplication1\CreditService.DAL\obj\Release\net7.0\CreditService.DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\RiderProjects\WebApplication1\CreditService.DAL\obj\Release\net7.0\CreditService.DAL.AssemblyInfoInputs.cache
+D:\RiderProjects\WebApplication1\CreditService.DAL\obj\Release\net7.0\CreditService.DAL.AssemblyInfo.cs
+D:\RiderProjects\WebApplication1\CreditService.DAL\obj\Release\net7.0\CreditService.DAL.csproj.CoreCompileInputs.cache
+D:\RiderProjects\WebApplication1\CreditService.DAL\obj\Release\net7.0\CreditService.DAL.csproj.CopyComplete
+D:\RiderProjects\WebApplication1\CreditService.DAL\obj\Release\net7.0\CreditService.DAL.dll
+D:\RiderProjects\WebApplication1\CreditService.DAL\obj\Release\net7.0\refint\CreditService.DAL.dll
+D:\RiderProjects\WebApplication1\CreditService.DAL\obj\Release\net7.0\CreditService.DAL.pdb
+D:\RiderProjects\WebApplication1\CreditService.DAL\obj\Release\net7.0\CreditService.DAL.genruntimeconfig.cache
+D:\RiderProjects\WebApplication1\CreditService.DAL\obj\Release\net7.0\ref\CreditService.DAL.dll
