@@ -101,3 +101,4 @@ C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService\bin\Debug\net8.0\
 C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService\bin\Debug\net8.0\Newtonsoft.Json.dll
 C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService\obj\Debug\net8.0\CreditService.sourcelink.json

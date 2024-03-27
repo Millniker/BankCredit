@@ -1,4 +1,4 @@
-using CreditService.Common.DTO;
+using CreditService.Common.DTO.Payment;
 using CreditService.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,10 +16,21 @@ public class PaymentController:ControllerBase
     }
     
     [HttpPost("")]
-    public async Task<ActionResult<string>> SendLoanApp(PaymentDto paymentDto)
+    public async Task<ActionResult<string>> SendLoanApp(SendPaymentDto paymentDto)
     {
         await _paymentService.PaymentProcessing(paymentDto);
 
         return Ok("Success");
+    }
+    [HttpGet("/bills/{accountId}")]
+    public async Task<ActionResult<List<BillPaymentDTO>>> GetBillPayment(int accountId)
+    {
+        return Ok(await _paymentService.GetBillPayment(accountId));
+    }
+
+    [HttpGet("/score/{userId}")]
+    public async Task<ActionResult<Int32>> GetCreditScore(string userId)
+    {
+        return Ok(await _paymentService.GetCreditScore(userId));
     }
 }

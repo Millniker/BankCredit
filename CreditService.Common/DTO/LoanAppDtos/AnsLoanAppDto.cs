@@ -9,6 +9,7 @@ public class AnsLoanAppDto
 
     [Required]
     public LoanStatusType Status { get; set; }
+    public string UserId { get; set; }
     
     public string Description { get; set; }
 }

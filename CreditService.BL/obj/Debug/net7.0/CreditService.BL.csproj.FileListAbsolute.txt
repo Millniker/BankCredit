@@ -82,3 +82,4 @@ C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.BL\obj\Debug\net7
 C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.BL\obj\Debug\net7.0\refint\CreditService.BL.dll
 C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.BL\obj\Debug\net7.0\CreditService.BL.pdb
 C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.BL\obj\Debug\net7.0\ref\CreditService.BL.dll
+C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.BL\obj\Debug\net7.0\CreditService.BL.sourcelink.json

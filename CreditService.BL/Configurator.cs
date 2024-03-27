@@ -20,7 +20,9 @@ namespace CreditService.BL;
             builder.Services.AddScoped<ICreditService, CreditRulesService>();
             builder.Services.AddScoped<ILoanService, LoanService>();
             builder.Services.AddScoped<IPaymentService, PaymentService>();
-            
+            builder.Services.AddHostedService<ScheduledTaskService>();
+            builder.Services.AddScoped<PaymentCalculator>();
+
         }
         
         public static void Migrate(IServiceProvider serviceProvider)

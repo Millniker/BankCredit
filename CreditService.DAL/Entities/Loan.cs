@@ -20,6 +20,7 @@ public class Loan
     public Guid CreditRulesId { get; set; }
     
     public Guid LoanAppId { get; set; }
-    public Guid AccountId { get; set; }
+    public String UserId { get; set; }
+    public int AccountId { get; set; }
     
 }

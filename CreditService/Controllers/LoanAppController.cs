@@ -16,7 +16,7 @@ public class LoanAppController:ControllerBase
     }
 
     [HttpGet("loanApp/{userId}/all")]
-    public async Task<ActionResult<List<LoanAppDto>>> GetAllUserLoanApps(Guid userId)
+    public async Task<ActionResult<List<LoanAppDto>>> GetAllUserLoanApps(string userId)
     {
         var loanApps = await _loanService.GetAllLoanAppDtoByUserId(userId);
         return Ok(loanApps);
@@ -30,14 +30,14 @@ public class LoanAppController:ControllerBase
     }
     
     [HttpGet("{userId}/all")]
-    public async Task<ActionResult<List<LoanDto>>> GetAllUserLoan(Guid userId)
+    public async Task<ActionResult<List<LoanDto>>> GetAllUserLoan(string userId)
     {
         var loan = await _loanService.GetAllLoanDtoByUserId(userId);
         return Ok(loan);
     }
     
     [HttpPost("send/{userId}")]
-    public async Task<ActionResult<string>> SendLoanApp(Guid userId, ShortLoanAppDto sendLoanAppDto)
+    public async Task<ActionResult<string>> SendLoanApp(string userId, ShortLoanAppDto sendLoanAppDto)
     {
         var ansLoanAppDto = await _loanService.SendLoanApp(userId,sendLoanAppDto);
         

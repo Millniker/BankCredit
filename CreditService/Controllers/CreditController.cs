@@ -2,7 +2,7 @@ using CreditService.Common.DTO;
 using CreditService.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication1.Controllers;
+namespace CreditService.Controllers;
 
 
 [Route("credit/")]

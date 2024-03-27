@@ -81,3 +81,4 @@ C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.DAL\obj\Debug\net
 C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.DAL\obj\Debug\net7.0\CreditService.DAL.pdb
 C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.DAL\obj\Debug\net7.0\CreditService.DAL.genruntimeconfig.cache
 C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.DAL\obj\Debug\net7.0\ref\CreditService.DAL.dll
+C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.DAL\obj\Debug\net7.0\CreditService.DAL.sourcelink.json

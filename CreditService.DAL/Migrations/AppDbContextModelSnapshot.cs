@@ -109,17 +109,6 @@ namespace ClassLibrary1.Migrations
                     b.ToTable("LoanApp");
                 });
 
-            modelBuilder.Entity("CreditService.DAL.Entities.MasterAccount", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MasterAccount");
-                });
-
             modelBuilder.Entity("CreditService.DAL.Entities.CreditRules", b =>
                 {
                     b.OwnsOne("CreditService.DAL.Entities.Money", "AmountMax", b1 =>
@@ -176,28 +165,6 @@ namespace ClassLibrary1.Migrations
                         .IsRequired();
 
                     b.Navigation("Loan");
-                });
-
-            modelBuilder.Entity("CreditService.DAL.Entities.MasterAccount", b =>
-                {
-                    b.OwnsOne("System.Collections.Generic.List<CreditService.DAL.Entities.Money>", "Money", b1 =>
-                        {
-                            b1.Property<Guid>("MasterAccountId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<int>("Capacity")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("MasterAccountId");
-
-                            b1.ToTable("MasterAccount");
-
-                            b1.WithOwner()
-                                .HasForeignKey("MasterAccountId");
-                        });
-
-                    b.Navigation("Money")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
