@@ -37,13 +37,11 @@ public class LoanAppController:ControllerBase
     }
     
     [HttpPost("send/{userId}")]
-    public async Task<ActionResult<string>> SendLoanApp(string userId, ShortLoanAppDto sendLoanAppDto)
+    public async Task<ActionResult<LoanResultResponse>> SendLoanApp(string userId, ShortLoanAppDto sendLoanAppDto)
     {
         var ansLoanAppDto = await _loanService.SendLoanApp(userId,sendLoanAppDto);
         
-        await _loanService.LoanProcessing(ansLoanAppDto);
-
-        return Ok("Success");
+        return Ok(ansLoanAppDto);
     }
 
 }

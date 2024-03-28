@@ -48,3 +48,16 @@ C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.Common\obj\Debug\
 C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.Common\obj\Debug\net7.0\CreditService.Common.pdb
 C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.Common\obj\Debug\net7.0\ref\CreditService.Common.dll
 C:\Users\AbramovNH\RiderProjects\WebApplication1\CreditService.Common\obj\Debug\net7.0\CreditService.Common.sourcelink.json
+D:\RiderProjects\BankCredit\CreditService.Common\bin\Debug\net7.0\CreditService.Common.deps.json
+D:\RiderProjects\BankCredit\CreditService.Common\bin\Debug\net7.0\CreditService.Common.dll
+D:\RiderProjects\BankCredit\CreditService.Common\bin\Debug\net7.0\CreditService.Common.pdb
+D:\RiderProjects\BankCredit\CreditService.Common\obj\Debug\net7.0\CreditService.Common.csproj.AssemblyReference.cache
+D:\RiderProjects\BankCredit\CreditService.Common\obj\Debug\net7.0\CreditService.Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\RiderProjects\BankCredit\CreditService.Common\obj\Debug\net7.0\CreditService.Common.AssemblyInfoInputs.cache
+D:\RiderProjects\BankCredit\CreditService.Common\obj\Debug\net7.0\CreditService.Common.AssemblyInfo.cs
+D:\RiderProjects\BankCredit\CreditService.Common\obj\Debug\net7.0\CreditService.Common.csproj.CoreCompileInputs.cache
+D:\RiderProjects\BankCredit\CreditService.Common\obj\Debug\net7.0\CreditService.Common.sourcelink.json
+D:\RiderProjects\BankCredit\CreditService.Common\obj\Debug\net7.0\CreditService.Common.dll
+D:\RiderProjects\BankCredit\CreditService.Common\obj\Debug\net7.0\refint\CreditService.Common.dll
+D:\RiderProjects\BankCredit\CreditService.Common\obj\Debug\net7.0\CreditService.Common.pdb
+D:\RiderProjects\BankCredit\CreditService.Common\obj\Debug\net7.0\ref\CreditService.Common.dll

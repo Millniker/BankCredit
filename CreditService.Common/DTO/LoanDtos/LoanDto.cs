@@ -17,4 +17,6 @@ public class LoanDto
     public Guid CreditRules { get; set; }
     
     public Guid LoanAppId { get; set; }
+    public Int32 Term { get; set;}
+
 }

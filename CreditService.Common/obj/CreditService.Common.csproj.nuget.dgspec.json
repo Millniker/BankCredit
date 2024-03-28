@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\AbramovNH\\RiderProjects\\WebApplication1\\CreditService.Common\\CreditService.Common.csproj": {}
+    "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj": {}
   },
   "projects": {
-    "C:\\Users\\AbramovNH\\RiderProjects\\WebApplication1\\CreditService.Common\\CreditService.Common.csproj": {
+    "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AbramovNH\\RiderProjects\\WebApplication1\\CreditService.Common\\CreditService.Common.csproj",
+        "projectUniqueName": "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj",
         "projectName": "CreditService.Common",
-        "projectPath": "C:\\Users\\AbramovNH\\RiderProjects\\WebApplication1\\CreditService.Common\\CreditService.Common.csproj",
-        "packagesPath": "C:\\Users\\AbramovNH\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AbramovNH\\RiderProjects\\WebApplication1\\CreditService.Common\\obj\\",
+        "projectPath": "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj",
+        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
+        "outputPath": "D:\\RiderProjects\\BankCredit\\CreditService.Common\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\AbramovNH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -75,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

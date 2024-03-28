@@ -2,10 +2,13 @@ using CreditService.DAL.Enum;
 
 namespace CreditService.Common.DTO;
 
-public class OpenAccountDto
+public class CreateAccountDto
 {
-    public Decimal InitialDeposit;
-    public string CurrencyType;
-    public string AccountType = "LOAN_TYPE";
-    public double InterestRate;
+    public int InitialDeposit { get; set; } = 0;
+
+    public CurrencyType CurrencyType { get; set; } = CurrencyType.RUB;
+
+    public AccountType AccountType { get; set; } = AccountType.LOAN_TYPE;
+
+    public double InterestRate { get; set; } = 10;
 }

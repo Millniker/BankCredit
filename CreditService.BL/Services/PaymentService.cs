@@ -37,14 +37,14 @@ public class PaymentService:IPaymentService
         var response = await _httpClient.PostAsJsonAsync(ApiConstants.WithdrawBaseUrl, new WithdrawDepositDTO
         {
             AccountId = paymentDto.AccountId,
-            Amount = paymentDto.Amount.Amount,
+            Amount = paymentDto.Amount.Amount.ToString(),
             CurrencyType = paymentDto.Amount.Currency
         });
         if (!response.IsSuccessStatusCode)
-            throw new FaildToLoadException("Ошибка оплаты");
+            throw new FaildToLoadException("Ошибка оплаты " +response.Content.ReadAsStringAsync().Result);
         
         var accountResponse = await _httpClient.GetAsync(ApiConstants.Account+"/"+paymentDto.AccountId);
-        if (accountResponse.IsSuccessStatusCode)
+        if (!accountResponse.IsSuccessStatusCode)
             throw new FaildToLoadException("Ошибка получения счета");
         var account = JsonConvert.DeserializeObject<AccountDto>(accountResponse.Content.ReadAsStringAsync().Result);
         if (account is { Balance: 0 })
@@ -71,6 +71,7 @@ public class PaymentService:IPaymentService
                 Message = "Кредит выплачен, счет закрыт"
             };
         }
+        
         billPayment.Amount.Amount -= paymentDto.Amount.Amount;
         if (billPayment.Amount.Amount <= 0)
         {
@@ -85,7 +86,7 @@ public class PaymentService:IPaymentService
         _context.Entry(billPayment).State = EntityState.Modified;
         _context.Loan.Attach(loan);
         _context.Entry(loan).State = EntityState.Modified;
-
+        await _context.SaveChangesAsync();
         return new Response {
                 Code = "200",
                 Message = "Оплата принята"
@@ -94,7 +95,7 @@ public class PaymentService:IPaymentService
 
     public async Task<List<BillPaymentDTO>> GetBillPayment(int accountId)
     {
-        return await _context.BillPayment.Select(e => new BillPaymentDTO
+        return await _context.BillPayment.Where(x => x.AccountId == accountId).Select(e => new BillPaymentDTO
         {
             Id = e.Id,
             UserId = e.UserId,
@@ -109,6 +110,7 @@ public class PaymentService:IPaymentService
 
     public async Task<Int32> GetCreditScore(string userId)
     {
+        
         var overduePayments = await _context.BillPayment.Where(e => e.Status == PaymentStatus.OverduePayment && e.UserId == userId).ToListAsync();
         return 100 - overduePayments.Count;
     }

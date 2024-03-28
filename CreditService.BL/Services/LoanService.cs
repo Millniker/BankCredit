@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Text;
 using CreditService.Common.DTO;
 using CreditService.Common.Exceptions;
 using CreditService.Common.Interfaces;
@@ -11,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using CreditService.Common.DTO.LoanAppDtos;
 using Newtonsoft.Json;
+using LoanResponse = CreditService.Common.DTO.LoanAppDtos.LoanResponse;
 
 namespace CreditService.BL.Services;
 
@@ -40,6 +42,7 @@ public class LoanService : ILoanService
                 InterestRate = p.Loan.InterestRate,
                 CurrencyType = p.Loan.CurrencyType,
                 CreditRules = p.Loan.CreditRulesId,
+                Term = p.Term
             },
         }).ToListAsync();
     }
@@ -91,7 +94,7 @@ public class LoanService : ILoanService
         };
     }
 
-    public async Task<AnsLoanAppDto> SendLoanApp(string userId, ShortLoanAppDto sendLoanAppDto)
+    public async Task<LoanResultResponse> SendLoanApp(string userId, ShortLoanAppDto sendLoanAppDto)
     {
         var creditRules = await _context.CreditRules.FindAsync(sendLoanAppDto.CreditRules);
 
@@ -122,10 +125,12 @@ public class LoanService : ILoanService
         {
             Id = new Guid(),
             Amount = sendLoanAppDto.Amount,
+            AccountId = 0,
             InterestRate = sendLoanAppDto.InterestRate,
             CurrencyType = sendLoanAppDto.CurrencyType,
             CreditRulesId = creditRules.Id,
-            UserId = userId
+            UserId = userId,
+            Term = sendLoanAppDto.Term
         };
         
         var loanAppEntity = new LoanApp
@@ -133,20 +138,21 @@ public class LoanService : ILoanService
             Id = new Guid(),
             LoanStatus = LoanStatusType.Pending,
             Date = DateTime.UtcNow,
-            UserId = userId
+            UserId = userId,
+            Term = sendLoanAppDto.Term
         };
         
         
-        var response = await _httpClient.PostAsJsonAsync(ApiConstants.SendOnCheckLoanBaseUrl, toDesicionDto);
-        if (response.StatusCode != (HttpStatusCode)200)
-            throw new ErrorReceivingDecisionException("Ошибка получения ответа по заявке на кредит");
-        var responseObject = JsonConvert.DeserializeObject<LoanResponse>(response.Content.ReadAsStringAsync().Result);
+        //var response = await _httpClient.PostAsJsonAsync(ApiConstants.SendOnCheckLoanBaseUrl, toDesicionDto);
+        //if (response.StatusCode != (HttpStatusCode)200)
+        //    throw new ErrorReceivingDecisionException("Ошибка получения ответа по заявке на кредит");
+        //var responseObject = JsonConvert.DeserializeObject<LoanResponse>(response.Content.ReadAsStringAsync().Result);
 
         await _context.LoanApp.AddAsync(loanAppEntity);
 
         loan.LoanAppId = loanAppEntity.Id;
         await _context.Loan.AddAsync(loan);
-        loanAppEntity.LoanStatus = responseObject is { Result: true } ? LoanStatusType.Approved  : LoanStatusType.Rejected;
+        loanAppEntity.LoanStatus = LoanStatusType.Approved;
         loanAppEntity.LoanId = loan.Id;
         loanAppEntity.Loan = loan;
 
@@ -154,62 +160,65 @@ public class LoanService : ILoanService
 
         _context.CreditRules.Attach(creditRules);
         _context.Entry(creditRules).State = EntityState.Modified;
-
-        if (responseObject is not { Result: true })
-            return new AnsLoanAppDto
-            {
-                Id = loanAppEntity.Id,
-                Status = LoanStatusType.Rejected,
-                Description = "В кредите отказано по следующей причине: " + responseObject?.Message
-            };
-        var loanResult = new AnsLoanAppDto
-        {
-            Id = loanAppEntity.Id,
-            UserId = userId,
-            Status = LoanStatusType.Approved,
-            Description = "Одобрен"
-        };
-        await LoanProcessing(loanResult);
         await _context.SaveChangesAsync();
 
-        return loanResult;
+        //if (responseObject is not { Result: true })
+        //    return new AnsLoanAppDto
+        //    {
+        //        Id = loanAppEntity.Id,
+         //       Status = LoanStatusType.Rejected,
+        //        Description = "В кредите отказано по следующей причине: " + responseObject?.Message
+        //    };
+        var loanResult = new AnsLoanAppDto
+        {
+            InitialDeposit = (int)loan.Amount,
+            CurrencyType = loan.CurrencyType,
+            AccountType = AccountType.LOAN_TYPE,
+            InterestRate = loan.InterestRate,
+            UserId = userId,
+        };
+        loanAppEntity.LoanStatus = LoanStatusType.Approved;
+        loanAppEntity.Description = "Одобрен";
+        var accountCreateResponse = await LoanProcessing(loanResult);
+        loan.AccountId = accountCreateResponse.AccountId;
+        _context.Loan.Attach(loan);
+        _context.Entry(loan).State = EntityState.Modified;
+        _context.LoanApp.Attach(loanAppEntity);
+        _context.Entry(loanAppEntity).State = EntityState.Modified;
+        _context.LoanApp.Attach(loanAppEntity);
+        _context.Entry(loanAppEntity).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+        var loanResponse = new LoanResultResponse
+        {
+            LoanStatus = "Результат по кредиту Одобрен",
+            AccountCode = accountCreateResponse.Code,
+            AccountStatus = "Результат создания кредитного счета " + accountCreateResponse.Message
+        };
+        return loanResponse;
 
     }
 
-    public async Task<Response> LoanProcessing(AnsLoanAppDto loanApp)
+    public async Task<AccountCreateResponse> LoanProcessing(AnsLoanAppDto loanApp)
     {
-        var loanAppEntity = await _context.LoanApp.FindAsync(loanApp.Id);
-        if (loanAppEntity == null)
+        var createAccountDTO = new CreateAccountDto
         {
-            throw new ItemNotFoundException($"Не найдена заявка на кредит с id={loanApp.Id}");
-        }
-
-        loanAppEntity.LoanStatus = loanApp.Status;
-        loanAppEntity.Description = loanApp.Description;
-
-        _context.LoanApp.Attach(loanAppEntity);
-        _context.Entry(loanAppEntity).State = EntityState.Modified;
-
-        var openAccountDto = new OpenAccountDto
-        {
-            InitialDeposit = loanAppEntity.Loan.Amount,
-            CurrencyType = loanAppEntity.Loan.CurrencyType.ToString(),
-            InterestRate = loanAppEntity.Loan.InterestRate,
+            InitialDeposit = loanApp.InitialDeposit,
+            CurrencyType = loanApp.CurrencyType,
+            AccountType = AccountType.LOAN_TYPE,
+            InterestRate = loanApp.InterestRate
         };
-        var response = await _httpClient.PostAsJsonAsync(ApiConstants.OpenAccountBaseUrl+"/"+loanApp.UserId, openAccountDto);
+        var response = await _httpClient.PostAsJsonAsync(ApiConstants.OpenAccountBaseUrl+"/"+loanApp.UserId, createAccountDTO);
         
         if (!response.IsSuccessStatusCode)
         {
-            throw new FaildToLoadException("Не удалось открыть счет");
+            throw new FaildToLoadException("Не удалось открыть счет "+ response.Content.ReadAsStringAsync().Result);
         }
         var account = JsonConvert.DeserializeObject<AccountDto>(response.Content.ReadAsStringAsync().Result);
-        var loan = await _context.Loan.FindAsync(loanAppEntity.LoanId);
-        loan.AccountId = account.AccountNumber;
-        await _context.SaveChangesAsync();
-        return new Response
+        return new AccountCreateResponse
         {
-            Code = "200",
-            Message = "Кредит оформлен"
+            Code = response.StatusCode,
+            Message = response.ReasonPhrase,
+            AccountId = account.Id
         };
     }
 }

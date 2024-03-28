@@ -17,20 +17,34 @@ public class PaymentCalculator
     public async Task CalculateAndSendPaymentsAsync()
     {
         var loans = await _dbContext.Loan.ToListAsync();
+        Console.WriteLine("Пошла возьня кредитов");
 
-        foreach (var billPayment in from loan in loans let paymentAmount = (decimal)loan.InterestRate * loan.Amount select new BillPayment
-                 {
-                     Id = new Guid(),
-                     UserId = loan.UserId,
-                     AccountId = loan.AccountId,
-                     LoanId = loan.Id,
-                     Amount = new Money(paymentAmount, loan.CurrencyType),
-                     StartDate = DateTime.Now,
-                     EndDate = DateTime.Now + TimeSpan.FromDays(30),
-                     Status = PaymentStatus.AwaitPayment
-                 })
+        foreach (var loan in loans)
         {
-            _dbContext.BillPayment.Add(billPayment);
+            var existingPayments = _dbContext.BillPayment
+                .Where(bp => bp.AccountId == loan.AccountId)
+                .ToList();
+
+            if (existingPayments.Count < loan.Term)
+            {
+                int remainingPayments = loan.Term - existingPayments.Count;
+
+                for (int i = 0; i < remainingPayments; i++)
+                {
+                    var billPayment = new BillPayment
+                    {
+                        Id = Guid.NewGuid(),
+                        UserId = loan.UserId,
+                        AccountId = loan.AccountId,
+                        LoanId = loan.Id,
+                        Amount = new Money((decimal)loan.InterestRate * loan.Amount, loan.CurrencyType),
+                        StartDate = DateTime.UtcNow,
+                        EndDate = DateTime.UtcNow + TimeSpan.FromDays(30),
+                        Status = PaymentStatus.AwaitPayment
+                    };
+                    _dbContext.BillPayment.Add(billPayment);
+                }
+            }
         }
         await _dbContext.SaveChangesAsync();
     }

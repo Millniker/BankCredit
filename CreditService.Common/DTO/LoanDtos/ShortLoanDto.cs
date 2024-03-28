@@ -10,6 +10,7 @@ public class ShortLoanDto
 
     [Required]
     public Double InterestRate { get; set;}
+    public Int32 Term { get; set;}
     
     [Required]
     public CurrencyType CurrencyType { get; set;}

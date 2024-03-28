@@ -18,9 +18,10 @@ public class ScheduledTaskService : BackgroundService
         {
             try
             {
+                Console.WriteLine("Пошла возьня");
                 using var scope = _serviceProvider.CreateScope();
                 var taskService = scope.ServiceProvider.GetRequiredService<PaymentCalculator>();
-                await taskService.UpdatePaymentStatusAsync();
+                    //await taskService.UpdatePaymentStatusAsync();
                 await taskService.CalculateAndSendPaymentsAsync();
                 
             }
@@ -29,8 +30,7 @@ public class ScheduledTaskService : BackgroundService
                 Console.WriteLine($"An error occurred while executing the scheduled task: {ex.Message}");
             }
 
-            // Пауза перед следующим запуском
-            await Task.Delay(TimeSpan.FromMinutes(10), stoppingToken);
+            await Task.Delay(TimeSpan.FromSeconds(1), stoppingToken);
         }
     }
 }

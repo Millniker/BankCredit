@@ -2,11 +2,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using CreditService.Common.DTO;
 using CreditService.Common.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SmallClientBusiness.Common.Exceptions;
 
 namespace CreditService.Common.System;
