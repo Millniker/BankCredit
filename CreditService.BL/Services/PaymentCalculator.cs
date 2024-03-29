@@ -19,47 +19,41 @@ public class PaymentCalculator
         var loans = await _dbContext.Loan.ToListAsync();
         Console.WriteLine("Пошла возьня кредитов");
 
-        foreach (var loan in loans)
+        foreach (var billPayment in from loan in loans let existingPayments = _dbContext.BillPayment
+                     .Where(bp => bp.AccountId == loan.AccountId)
+                     .ToList() where existingPayments.Count < loan.Term select new BillPayment
+                 {
+                     Id = Guid.NewGuid(),
+                     UserId = loan.UserId,
+                     AccountId = loan.AccountId,
+                     LoanId = loan.Id,
+                     Amount = new Money((decimal)loan.InterestRate/100 * loan.Amount, loan.CurrencyType),
+                     StartDate = DateTime.UtcNow,
+                     EndDate = DateTime.UtcNow + TimeSpan.FromDays(30),
+                     Status = PaymentStatus.AwaitPayment
+                 })
         {
-            var existingPayments = _dbContext.BillPayment
-                .Where(bp => bp.AccountId == loan.AccountId)
-                .ToList();
-
-            if (existingPayments.Count < loan.Term)
-            {
-                int remainingPayments = loan.Term - existingPayments.Count;
-
-                for (int i = 0; i < remainingPayments; i++)
-                {
-                    var billPayment = new BillPayment
-                    {
-                        Id = Guid.NewGuid(),
-                        UserId = loan.UserId,
-                        AccountId = loan.AccountId,
-                        LoanId = loan.Id,
-                        Amount = new Money((decimal)loan.InterestRate * loan.Amount, loan.CurrencyType),
-                        StartDate = DateTime.UtcNow,
-                        EndDate = DateTime.UtcNow + TimeSpan.FromDays(30),
-                        Status = PaymentStatus.AwaitPayment
-                    };
-                    _dbContext.BillPayment.Add(billPayment);
-                }
-            }
+            _dbContext.BillPayment.Add(billPayment);
         }
         await _dbContext.SaveChangesAsync();
     }
+
     public async Task UpdatePaymentStatusAsync()
     {
-        var overduePayments = await _dbContext.BillPayment
-            .Where(p => p.Status != PaymentStatus.OverduePayment && p.EndDate < DateTime.Now)
-            .ToListAsync();
-        foreach (var payment in overduePayments)
+        var payments = await _dbContext.BillPayment.ToListAsync();
+        await CalculateAndSendPaymentsAsync();
+        if (payments.Count > 0)
         {
-            payment.Status = PaymentStatus.OverduePayment;
-            _dbContext.BillPayment.Attach(payment);
-            _dbContext.Entry(payment).State = EntityState.Modified;
-        }
+            var overduePayments = await _dbContext.BillPayment
+                .Where(p => p.Status != PaymentStatus.OverduePayment && p.EndDate < DateTime.Now)
+                .ToListAsync();
+            foreach (var payment in overduePayments)
+            {
+                payment.Status = PaymentStatus.OverduePayment;
+                _dbContext.BillPayment.Attach(payment);
+                _dbContext.Entry(payment).State = EntityState.Modified;
+            }
 
-        await _dbContext.SaveChangesAsync();
+        }
     }
 }
