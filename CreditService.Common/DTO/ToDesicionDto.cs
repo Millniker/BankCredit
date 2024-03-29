@@ -13,10 +13,6 @@ public class ToDesicionDto
     public CurrencyType CurrencyType { get; set;}
     
     public Guid CreditRules { get; set; }
-    public string Email { get; set; }
-    public string Username { get; set; }
-    public string Password { get; set; }
-    public string Role { get; set; }
     public double CreditScore { get; set; }
     
     public MoneyDto AmountMax { get; set;}
@@ -30,9 +26,6 @@ public class ToDesicionDto
     public Double InterestRateMin { get; set;}
     
     [Required]
-    public String Name { get; set;}
-    
-    [Required]
     public Int32 Term { get; set;}
-    public Decimal MasterAccountAmount {get; set; }
+
 }

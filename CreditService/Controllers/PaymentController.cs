@@ -1,3 +1,4 @@
+using CreditService.Common.DTO;
 using CreditService.Common.DTO.Payment;
 using CreditService.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,7 @@ public class PaymentController:ControllerBase
     }
 
     [HttpGet("/score/{userId}")]
-    public async Task<ActionResult<Int32>> GetCreditScore(string userId)
+    public async Task<ActionResult<CreditScoreDto>> GetCreditScore(int userId)
     {
         return Ok(await _paymentService.GetCreditScore(userId));
     }

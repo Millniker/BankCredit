@@ -73,24 +73,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nikit\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj",
+      "projectUniqueName": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj",
       "projectName": "CreditService.Common",
-      "projectPath": "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj",
-      "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
-      "outputPath": "D:\\RiderProjects\\BankCredit\\CreditService.Common\\obj\\",
+      "projectPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj",
+      "packagesPath": "C:\\Users\\AbramovNH\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.Common\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\AbramovNH\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -151,7 +146,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

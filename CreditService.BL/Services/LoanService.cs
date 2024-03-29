@@ -27,9 +27,9 @@ public class LoanService : ILoanService
         _httpClient = httpClient.Value;
     }
 
-    public async Task<List<LoanAppDto>> GetAllLoanAppDtoByUserId(string userId)
+    public async Task<List<LoanAppDto>> GetAllLoanAppDtoByUserId(int userId)
     {
-        return await _context.LoanApp.Where(x => x.UserId == userId).Select(p => new LoanAppDto()
+        return await _context.LoanApp.Where(x => x.UserId == userId).Select(p => new LoanAppDto
         {
             Id = p.Id,
             Status = p.LoanStatus,
@@ -48,7 +48,7 @@ public class LoanService : ILoanService
     }
     
 
-    public async Task<List<LoanDto>> GetAllLoanDtoByUserId(string userId)
+    public async Task<List<LoanDto>> GetAllLoanDtoByUserId(int userId)
     {
         return await _context.LoanApp.Where(x => x.UserId == userId && x.LoanStatus == LoanStatusType.Approved)
             .Select(p => new LoanDto
@@ -84,7 +84,7 @@ public class LoanService : ILoanService
             Date = loanApp.Date,
             Description = loanApp.Description,
             LoanId = loanApp.LoanId,
-            Loan = new ShortLoanDto()
+            Loan = new ShortLoanDto
             {
                 Amount = loan.Amount,
                 InterestRate = loan.InterestRate,
@@ -94,7 +94,7 @@ public class LoanService : ILoanService
         };
     }
 
-    public async Task<LoanResultResponse> SendLoanApp(string userId, ShortLoanAppDto sendLoanAppDto)
+    public async Task<LoanResultResponse> SendLoanApp(int userId, ShortLoanAppDto sendLoanAppDto)
     {
         var creditRules = await _context.CreditRules.FindAsync(sendLoanAppDto.CreditRules);
 
@@ -102,22 +102,21 @@ public class LoanService : ILoanService
         {
             throw new ItemNotFoundException($"Не найдены условия кредита с id={sendLoanAppDto.CreditRules}");
         }
+        var responseCreditScore = await _httpClient.GetAsync(ApiConstants.CreditScore+"/"+userId);
+        if (responseCreditScore.StatusCode != (HttpStatusCode)200)
+            throw new ErrorReceivingDecisionException("Ошибка получения ответа по заявке на кредит");
+        var responseCreditScoreObject = JsonConvert.DeserializeObject<CreditScoreDto>(responseCreditScore.Content.ReadAsStringAsync().Result);
         var toDesicionDto = new ToDesicionDto
         {
             Amount = sendLoanAppDto.Amount,
             InterestRate = sendLoanAppDto.InterestRate,
             CurrencyType = sendLoanAppDto.CurrencyType,
             CreditRules = sendLoanAppDto.CreditRules,
-            Email = "cdfvjfjvnfj@gmail.com",
-            Username = "Petr",
-            Password = "vfnvfjnvj",
-            Role = "CLIENT",
-            CreditScore = 16,
+            CreditScore = responseCreditScoreObject.Score,
             AmountMax = new MoneyDto(creditRules.AmountMax.Amount, creditRules.AmountMax.Currency),
             AmountMin = new MoneyDto(creditRules.AmountMin.Amount, creditRules.AmountMin.Currency),
             InterestRateMax = creditRules.InterestRateMax,
             InterestRateMin = creditRules.InterestRateMin,
-            Name = creditRules.Name,
             Term = creditRules.Term,
         };
         
@@ -143,10 +142,10 @@ public class LoanService : ILoanService
         };
         
         
-        //var response = await _httpClient.PostAsJsonAsync(ApiConstants.SendOnCheckLoanBaseUrl, toDesicionDto);
-        //if (response.StatusCode != (HttpStatusCode)200)
-        //    throw new ErrorReceivingDecisionException("Ошибка получения ответа по заявке на кредит");
-        //var responseObject = JsonConvert.DeserializeObject<LoanResponse>(response.Content.ReadAsStringAsync().Result);
+        var response = await _httpClient.PostAsJsonAsync(ApiConstants.SendOnCheckLoanBaseUrl, toDesicionDto);
+        if (response.StatusCode != (HttpStatusCode)200)
+            throw new ErrorReceivingDecisionException("Ошибка получения ответа по заявке на кредит");
+        var responseObject = JsonConvert.DeserializeObject<LoanResponse>(response.Content.ReadAsStringAsync().Result);
 
         await _context.LoanApp.AddAsync(loanAppEntity);
 
@@ -162,13 +161,13 @@ public class LoanService : ILoanService
         _context.Entry(creditRules).State = EntityState.Modified;
         await _context.SaveChangesAsync();
 
-        //if (responseObject is not { Result: true })
-        //    return new AnsLoanAppDto
-        //    {
-        //        Id = loanAppEntity.Id,
-         //       Status = LoanStatusType.Rejected,
-        //        Description = "В кредите отказано по следующей причине: " + responseObject?.Message
-        //    };
+        if (responseObject is not { Result: true })
+            return new LoanResultResponse
+            {
+                LoanStatus = "В кредите отказано. Причина: " + responseObject?.Message,
+                AccountCode = HttpStatusCode.Conflict,
+                AccountStatus = "Результат создания кредитного счета Не создан"
+            };
         var loanResult = new AnsLoanAppDto
         {
             InitialDeposit = (int)loan.Amount,

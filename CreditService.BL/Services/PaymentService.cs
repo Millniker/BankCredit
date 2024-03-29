@@ -26,6 +26,10 @@ public class PaymentService:IPaymentService
     {
         var loan = await _context.Loan.FindAsync(paymentDto.LoanId);
         var billPayment = await _context.BillPayment.FindAsync(paymentDto.BillPaymentId);
+        if (billPayment is { Status: PaymentStatus.Paid })
+        {
+            throw new IncorrectDataException("Счет уже оплачен");
+        }
         if (loan == null)
         {
             throw new ItemNotFoundException($"не найден кредит с id={paymentDto.LoanId}");
@@ -34,15 +38,25 @@ public class PaymentService:IPaymentService
         {
             throw new ItemNotFoundException($"не платеж с id={paymentDto.BillPaymentId}");
         }
-        var response = await _httpClient.PostAsJsonAsync(ApiConstants.WithdrawBaseUrl, new WithdrawDepositDTO
+
+        var pay = (double)paymentDto.Amount.Amount / (1 + loan.InterestRate);
+        var interest = (double)paymentDto.Amount.Amount - pay;
+        var responsePay = await _httpClient.PostAsJsonAsync(ApiConstants.WithdrawBaseUrl, new WithdrawDepositDTO
         {
             AccountId = paymentDto.AccountId,
-            Amount = paymentDto.Amount.Amount.ToString(),
+            Amount = interest.ToString().Replace(",", "."),
             CurrencyType = paymentDto.Amount.Currency
         });
-        if (!response.IsSuccessStatusCode)
-            throw new FaildToLoadException("Ошибка оплаты " +response.Content.ReadAsStringAsync().Result);
-        
+        var responseInterst = await _httpClient.PostAsJsonAsync(ApiConstants.DepositBaseUrl, new WithdrawDepositDTO
+        {
+            AccountId = 1,
+            Amount = pay.ToString().Replace(",", "."),
+            CurrencyType = paymentDto.Amount.Currency
+        });
+        if (!responsePay.IsSuccessStatusCode)
+            throw new FaildToLoadException("Ошибка оплаты " +responsePay.Content.ReadAsStringAsync().Result);
+        if (!responseInterst.IsSuccessStatusCode)
+            throw new FaildToLoadException("Ошибка оплаты " +responseInterst.Content.ReadAsStringAsync().Result);
         var accountResponse = await _httpClient.GetAsync(ApiConstants.Account+"/"+paymentDto.AccountId);
         if (!accountResponse.IsSuccessStatusCode)
             throw new FaildToLoadException("Ошибка получения счета");
@@ -64,7 +78,20 @@ public class PaymentService:IPaymentService
                     Message = "Кредит выплачен, не удалось закрыть счет"
                 };
             }
-            
+            var responseClose= await _httpClient.PostAsJsonAsync(ApiConstants.DepositBaseUrl, new WithdrawDepositDTO
+            {
+                AccountId = 1,
+                Amount = loan.Amount.ToString("0,0000"),
+                CurrencyType = paymentDto.Amount.Currency
+            });
+            if (!responseClose.IsSuccessStatusCode)
+            {
+                return new Response
+                {
+                    Code = "200",
+                    Message = "Кредит выплачен, не удалось закрыть счет"
+                };
+            }
             return new Response
             {
                 Code = "200",
@@ -108,11 +135,13 @@ public class PaymentService:IPaymentService
         }).ToListAsync();
     }
 
-    public async Task<Int32> GetCreditScore(string userId)
+    public async Task<CreditScoreDto> GetCreditScore(int userId)
     {
-        
         var overduePayments = await _context.BillPayment.Where(e => e.Status == PaymentStatus.OverduePayment && e.UserId == userId).ToListAsync();
-        return 100 - overduePayments.Count;
+        return new CreditScoreDto
+        {
+            Score = Math.Max(100 - overduePayments.Count, 0)
+        };
     }
 
 }

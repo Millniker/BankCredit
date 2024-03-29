@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\RiderProjects\\BankCredit\\CreditService.BL\\CreditService.BL.csproj": {}
+    "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.BL\\CreditService.BL.csproj": {}
   },
   "projects": {
-    "D:\\RiderProjects\\BankCredit\\CreditService.BL\\CreditService.BL.csproj": {
+    "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.BL\\CreditService.BL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\RiderProjects\\BankCredit\\CreditService.BL\\CreditService.BL.csproj",
+        "projectUniqueName": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.BL\\CreditService.BL.csproj",
         "projectName": "CreditService.BL",
-        "projectPath": "D:\\RiderProjects\\BankCredit\\CreditService.BL\\CreditService.BL.csproj",
-        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
-        "outputPath": "D:\\RiderProjects\\BankCredit\\CreditService.BL\\obj\\",
+        "projectPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.BL\\CreditService.BL.csproj",
+        "packagesPath": "C:\\Users\\AbramovNH\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.BL\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\AbramovNH\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -32,11 +28,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj": {
-                "projectPath": "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj"
+              "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj": {
+                "projectPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj"
               },
-              "D:\\RiderProjects\\BankCredit\\CreditService.DAL\\CreditService.DAL.csproj": {
-                "projectPath": "D:\\RiderProjects\\BankCredit\\CreditService.DAL\\CreditService.DAL.csproj"
+              "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.DAL\\CreditService.DAL.csproj": {
+                "projectPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.DAL\\CreditService.DAL.csproj"
               }
             }
           }
@@ -101,25 +97,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj": {
+    "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj",
+        "projectUniqueName": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj",
         "projectName": "CreditService.Common",
-        "projectPath": "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj",
-        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
-        "outputPath": "D:\\RiderProjects\\BankCredit\\CreditService.Common\\obj\\",
+        "projectPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj",
+        "packagesPath": "C:\\Users\\AbramovNH\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.Common\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\AbramovNH\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -180,25 +172,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\RiderProjects\\BankCredit\\CreditService.DAL\\CreditService.DAL.csproj": {
+    "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.DAL\\CreditService.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\RiderProjects\\BankCredit\\CreditService.DAL\\CreditService.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.DAL\\CreditService.DAL.csproj",
         "projectName": "CreditService.DAL",
-        "projectPath": "D:\\RiderProjects\\BankCredit\\CreditService.DAL\\CreditService.DAL.csproj",
-        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
-        "outputPath": "D:\\RiderProjects\\BankCredit\\CreditService.DAL\\obj\\",
+        "projectPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.DAL\\CreditService.DAL.csproj",
+        "packagesPath": "C:\\Users\\AbramovNH\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.DAL\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\AbramovNH\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -212,8 +200,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj": {
-                "projectPath": "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj"
+              "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj": {
+                "projectPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj"
               }
             }
           }
@@ -283,7 +271,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

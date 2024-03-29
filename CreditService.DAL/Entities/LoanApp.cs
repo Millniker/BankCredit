@@ -22,6 +22,6 @@ public class LoanApp
     
     public Loan Loan { get; set; }
     
-    public String UserId { get; set; }
+    public int UserId { get; set; }
     public Int32 Term { get; set;}
 }

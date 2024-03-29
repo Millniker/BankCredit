@@ -53,12 +53,11 @@ public class PaymentCalculator
         var overduePayments = await _dbContext.BillPayment
             .Where(p => p.Status != PaymentStatus.OverduePayment && p.EndDate < DateTime.Now)
             .ToListAsync();
-
         foreach (var payment in overduePayments)
         {
             payment.Status = PaymentStatus.OverduePayment;
-            _dbContext.Entry(payment).State = EntityState.Modified;
             _dbContext.BillPayment.Attach(payment);
+            _dbContext.Entry(payment).State = EntityState.Modified;
         }
 
         await _dbContext.SaveChangesAsync();

@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "2xeb+MhQ5CKZxZjtpShO68RTOQxodQkLteNcG6iqca0f3nl+CFMJgTZLjkvttnUrHUgTsEx9Mho3lT6De31u3A==",
+  "dgSpecHash": "XjTfGyJbuRNac5VuMwztjqSFH1hEaWbtGSvi7HOAFwAP1ncTqLu1fit+D340zosGnCrMqfT+ye2tQq9JfEmusw==",
   "success": true,
-  "projectFilePath": "D:\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj",
+  "projectFilePath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\CreditService.Common\\CreditService.Common.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\nikit\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.16\\microsoft.aspnetcore.openapi.7.0.16.nupkg.sha512",
-    "C:\\Users\\nikit\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
-    "C:\\Users\\nikit\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.16\\microsoft.netcore.app.ref.7.0.16.nupkg.sha512",
-    "C:\\Users\\nikit\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.16\\microsoft.windowsdesktop.app.ref.7.0.16.nupkg.sha512",
-    "C:\\Users\\nikit\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.16\\microsoft.aspnetcore.app.ref.7.0.16.nupkg.sha512"
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.16\\microsoft.aspnetcore.openapi.7.0.16.nupkg.sha512",
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.16\\microsoft.netcore.app.ref.7.0.16.nupkg.sha512",
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.16\\microsoft.windowsdesktop.app.ref.7.0.16.nupkg.sha512",
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.16\\microsoft.aspnetcore.app.ref.7.0.16.nupkg.sha512"
   ],
   "logs": []
 }
