@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\RiderProjects\\BankCredit\\WebApplication1.csproj": {}
+    "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\WebApplication1.csproj": {}
   },
   "projects": {
-    "D:\\RiderProjects\\BankCredit\\WebApplication1.csproj": {
+    "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\WebApplication1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\RiderProjects\\BankCredit\\WebApplication1.csproj",
+        "projectUniqueName": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\WebApplication1.csproj",
         "projectName": "WebApplication1",
-        "projectPath": "D:\\RiderProjects\\BankCredit\\WebApplication1.csproj",
-        "packagesPath": "C:\\Users\\nikit\\.nuget\\packages\\",
-        "outputPath": "D:\\RiderProjects\\BankCredit\\obj\\",
+        "projectPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\WebApplication1.csproj",
+        "packagesPath": "C:\\Users\\AbramovNH\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\nikit\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\AbramovNH\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -95,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

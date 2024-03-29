@@ -1,0 +1,8 @@
+C:\Users\AbramovNH\RiderProjects\BankCredit\obj\Debug\net7.0\WebApplication1.csproj.AssemblyReference.cache
+C:\Users\AbramovNH\RiderProjects\BankCredit\obj\Debug\net7.0\WebApplication1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AbramovNH\RiderProjects\BankCredit\obj\Debug\net7.0\WebApplication1.AssemblyInfoInputs.cache
+C:\Users\AbramovNH\RiderProjects\BankCredit\obj\Debug\net7.0\WebApplication1.AssemblyInfo.cs
+C:\Users\AbramovNH\RiderProjects\BankCredit\obj\Debug\net7.0\WebApplication1.csproj.CoreCompileInputs.cache
+C:\Users\AbramovNH\RiderProjects\BankCredit\obj\Debug\net7.0\WebApplication1.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\AbramovNH\RiderProjects\BankCredit\obj\Debug\net7.0\WebApplication1.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\AbramovNH\RiderProjects\BankCredit\obj\Debug\net7.0\WebApplication1.sourcelink.json
