@@ -8,4 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CreditService.BL
-build_property.ProjectDir = D:\RiderProjects\WebApplication1\CreditService.BL\
+build_property.ProjectDir = /credit/BankCredit/CreditService.BL/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 

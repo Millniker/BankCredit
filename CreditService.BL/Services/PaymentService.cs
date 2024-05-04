@@ -2,6 +2,7 @@ using System.Net.Http.Json;
 using CreditService.Common.DTO;
 using CreditService.Common.DTO.Payment;
 using CreditService.Common.Exceptions;
+using CreditService.Common.Http;
 using CreditService.Common.Interfaces;
 using CreditService.Common.System;
 using CreditService.DAL;
@@ -15,11 +16,11 @@ namespace CreditService.BL.Services;
 public class PaymentService:IPaymentService
 {
     private readonly AppDbContext _context;
-    private readonly HttpClient _httpClient;
-    public PaymentService(AppDbContext context, IOptions<HttpClient> httpClient)
+    private readonly AccountHttp _accountHttpClient;
+    public PaymentService(AppDbContext context,  AccountHttp accountHttp)
     {
         _context = context;
-        _httpClient = httpClient.Value;
+        _accountHttpClient = accountHttp;
     }
 
     public async Task<Response> PaymentProcessing(SendPaymentDto paymentDto)
@@ -40,37 +41,31 @@ public class PaymentService:IPaymentService
         }
 
         var pay = (double)paymentDto.Amount.Amount / (1 + loan.InterestRate);
-        var interest = (double)paymentDto.Amount.Amount - pay;
-        var responsePay = await _httpClient.PostAsJsonAsync(ApiConstants.WithdrawBaseUrl, new WithdrawDepositDTO
+        var interest = (double)paymentDto.Amount.Amount - pay; 
+        await _accountHttpClient.WithdrowMoney(new WithdrawDepositDTO
         {
             AccountId = paymentDto.AccountId,
             Amount = interest.ToString().Replace(",", "."),
             CurrencyType = paymentDto.Amount.Currency
+
         });
-        var responseInterst = await _httpClient.PostAsJsonAsync(ApiConstants.DepositBaseUrl, new WithdrawDepositDTO
+        await _accountHttpClient.DepositMoney(new WithdrawDepositDTO
         {
             AccountId = 1,
             Amount = pay.ToString().Replace(",", "."),
             CurrencyType = paymentDto.Amount.Currency
+
         });
-        if (!responsePay.IsSuccessStatusCode)
-            throw new FaildToLoadException("Ошибка оплаты " +responsePay.Content.ReadAsStringAsync().Result);
-        if (!responseInterst.IsSuccessStatusCode)
-            throw new FaildToLoadException("Ошибка оплаты " +responseInterst.Content.ReadAsStringAsync().Result);
-        var accountResponse = await _httpClient.GetAsync(ApiConstants.Account+"/"+paymentDto.AccountId);
-        if (!accountResponse.IsSuccessStatusCode)
-            throw new FaildToLoadException("Ошибка получения счета");
-        var account = JsonConvert.DeserializeObject<AccountDto>(accountResponse.Content.ReadAsStringAsync().Result);
+
+
+        var account = await _accountHttpClient.GetAccount(paymentDto.AccountId);
         if (account is { Balance: 0 })
         {
-            billPayment.Amount.Amount = 0;
-            billPayment.Status = PaymentStatus.Paid;
-            _context.BillPayment.Attach(billPayment);
-            _context.Entry(billPayment).State = EntityState.Modified;
+            _context.BillPayment.Remove(billPayment);
             _context.Loan.Remove(loan);
             await _context.SaveChangesAsync();
-            var closeAccount =  await _httpClient.DeleteAsync(ApiConstants.CloseAccountBaseUrl+"/"+ paymentDto.AccountId);
-            if (!closeAccount.IsSuccessStatusCode)
+           
+            if (! await _accountHttpClient.DeleteAccount(paymentDto.AccountId))
             {
                 return new Response
                 {
@@ -78,20 +73,14 @@ public class PaymentService:IPaymentService
                     Message = "Кредит выплачен, не удалось закрыть счет"
                 };
             }
-            var responseClose= await _httpClient.PostAsJsonAsync(ApiConstants.DepositBaseUrl, new WithdrawDepositDTO
+
+            await _accountHttpClient.DepositMoney(new WithdrawDepositDTO
             {
                 AccountId = 1,
                 Amount = loan.Amount.ToString("0,0000"),
                 CurrencyType = paymentDto.Amount.Currency
             });
-            if (!responseClose.IsSuccessStatusCode)
-            {
-                return new Response
-                {
-                    Code = "200",
-                    Message = "Кредит выплачен, не удалось закрыть счет"
-                };
-            }
+            
             return new Response
             {
                 Code = "200",
@@ -102,15 +91,11 @@ public class PaymentService:IPaymentService
         billPayment.Amount.Amount -= paymentDto.Amount.Amount;
         if (billPayment.Amount.Amount <= 0)
         {
-            billPayment.Amount.Amount = 0;
-            billPayment.Status = PaymentStatus.Paid;
-
+            _context.BillPayment.Remove(billPayment);
         }
         
         if (account != null) loan.Amount = account.Balance;
         
-        _context.BillPayment.Attach(billPayment);
-        _context.Entry(billPayment).State = EntityState.Modified;
         _context.Loan.Attach(loan);
         _context.Entry(loan).State = EntityState.Modified;
         await _context.SaveChangesAsync();

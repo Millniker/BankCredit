@@ -474,11 +474,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\WebApplication1.csproj",
+      "projectUniqueName": "C:\\Users\\AbramovNH\\RiderProjects\\patterns\\BankCredit\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\WebApplication1.csproj",
+      "projectPath": "C:\\Users\\AbramovNH\\RiderProjects\\patterns\\BankCredit\\WebApplication1.csproj",
       "packagesPath": "C:\\Users\\AbramovNH\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\obj\\",
+      "outputPath": "C:\\Users\\AbramovNH\\RiderProjects\\patterns\\BankCredit\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\AbramovNH\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -535,19 +535,19 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[7.0.16, 7.0.16]"
+            "version": "[7.0.18, 7.0.18]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[7.0.16, 7.0.16]"
+            "version": "[7.0.18, 7.0.18]"
           },
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[7.0.16, 7.0.16]"
+            "version": "[7.0.18, 7.0.18]"
           },
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[7.0.16, 7.0.16]"
+            "version": "[7.0.18, 7.0.18]"
           }
         ],
         "frameworkReferences": {
@@ -558,7 +558,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
       }
     }
   }

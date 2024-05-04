@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XViwqrpYMRn3ZpExOXcLU7jCHNvVkixEnCk5wIdckgbDGMhf0vBEZ2TYHT9FdGwDzlLcA8oj5+PMnk09TQ/g5g==",
+  "dgSpecHash": "RLGewrwbLc2spKwV7Y3M+TBzDV5Cu4CyQWQSP6VfRNzUl84kfc+M/ByOWxsJdR9IsUIgEnabLHXSM22RVfFjYA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\AbramovNH\\RiderProjects\\BankCredit\\WebApplication1.csproj",
+  "projectFilePath": "C:\\Users\\AbramovNH\\RiderProjects\\patterns\\BankCredit\\WebApplication1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.16\\microsoft.aspnetcore.openapi.7.0.16.nupkg.sha512",
     "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
@@ -11,10 +11,10 @@
     "C:\\Users\\AbramovNH\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "C:\\Users\\AbramovNH\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
     "C:\\Users\\AbramovNH\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512",
-    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.16\\microsoft.netcore.app.ref.7.0.16.nupkg.sha512",
-    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.16\\microsoft.windowsdesktop.app.ref.7.0.16.nupkg.sha512",
-    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.16\\microsoft.aspnetcore.app.ref.7.0.16.nupkg.sha512",
-    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.16\\microsoft.netcore.app.host.win-x64.7.0.16.nupkg.sha512"
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.18\\microsoft.netcore.app.ref.7.0.18.nupkg.sha512",
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.18\\microsoft.windowsdesktop.app.ref.7.0.18.nupkg.sha512",
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.18\\microsoft.aspnetcore.app.ref.7.0.18.nupkg.sha512",
+    "C:\\Users\\AbramovNH\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.18\\microsoft.netcore.app.host.win-x64.7.0.18.nupkg.sha512"
   ],
   "logs": []
 }

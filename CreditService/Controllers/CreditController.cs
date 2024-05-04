@@ -1,5 +1,8 @@
+using CreditService.BL.Services;
 using CreditService.Common.DTO;
 using CreditService.Common.Interfaces;
+using CreditService.Common.System;
+using CreditService.DAL;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CreditService.Controllers;
@@ -11,12 +14,15 @@ public class CreditController:ControllerBase
 {
 
     private readonly ICreditService _creditService;
+    private readonly LoggerService _logger;
 
-    public CreditController(ICreditService creditService)
+    public CreditController(ICreditService creditService,LoggerService logger)
     {
         _creditService = creditService;
+        _logger = logger;
+        
     }
-
+    
     [HttpGet("all")]
     public async Task<ActionResult<List<CreditDto>>> GetAllCreditRules()
     {
@@ -43,15 +49,15 @@ public class CreditController:ControllerBase
     [HttpPost("")]
     public async Task<ActionResult<string>> AddCreditRule(AddCreditRuleDto addCreditDto)
     {
+        var http = HttpContext;
         await _creditService.AddCreditRule(addCreditDto);
-
-        return Ok("Success created");
-    }
+            _logger.Log(http);
+            return Ok("Success created");
+    }    
     [HttpDelete("{id}")]
     public async Task<ActionResult<string>> DeleteCreditRule(Guid id)
     {
         await _creditService.DeleteCreditRule(id);
-
         return Ok("Success deleted");
     }
 }

@@ -21,7 +21,7 @@ public class PaymentCalculator
 
         foreach (var billPayment in from loan in loans let existingPayments = _dbContext.BillPayment
                      .Where(bp => bp.AccountId == loan.AccountId)
-                     .ToList() where existingPayments.Count < loan.Term select new BillPayment
+                     .ToList() where existingPayments.Count < loan.Term && loan.Amount > 0 select new BillPayment
                  {
                      Id = Guid.NewGuid(),
                      UserId = loan.UserId,
@@ -29,7 +29,7 @@ public class PaymentCalculator
                      LoanId = loan.Id,
                      Amount = new Money((decimal)loan.InterestRate/100 * loan.Amount, loan.CurrencyType),
                      StartDate = DateTime.UtcNow,
-                     EndDate = DateTime.UtcNow + TimeSpan.FromDays(30),
+                     EndDate = DateTime.UtcNow.AddMinutes(10),
                      Status = PaymentStatus.AwaitPayment
                  })
         {
@@ -37,22 +37,26 @@ public class PaymentCalculator
         }
         await _dbContext.SaveChangesAsync();
     }
-
     public async Task UpdatePaymentStatusAsync()
     {
         var payments = await _dbContext.BillPayment.ToListAsync();
         await CalculateAndSendPaymentsAsync();
+	Console.WriteLine(payments.Count);
         if (payments.Count > 0)
         {
             var overduePayments = await _dbContext.BillPayment
-                .Where(p => p.Status != PaymentStatus.OverduePayment && p.EndDate < DateTime.Now)
+                .Where(p => p.Status != PaymentStatus.OverduePayment && p.Status != PaymentStatus.Paid && p.EndDate < DateTime.UtcNow)
                 .ToListAsync();
+            Console.WriteLine(overduePayments);
             foreach (var payment in overduePayments)
             {
                 payment.Status = PaymentStatus.OverduePayment;
                 _dbContext.BillPayment.Attach(payment);
                 _dbContext.Entry(payment).State = EntityState.Modified;
-            }
+                await _dbContext.SaveChangesAsync();
+
+            };
+	        await _dbContext.SaveChangesAsync();
 
         }
     }

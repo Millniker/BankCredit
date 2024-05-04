@@ -22,14 +22,14 @@ public class ScheduledTaskService : BackgroundService
                 using var scope = _serviceProvider.CreateScope();
                 var taskService = scope.ServiceProvider.GetRequiredService<PaymentCalculator>(); 
                 await taskService.UpdatePaymentStatusAsync();
-                
+                               
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"An error occurred while executing the scheduled task: {ex.Message}");
             }
 
-            await Task.Delay(TimeSpan.FromSeconds(1), stoppingToken);
+            await Task.Delay(TimeSpan.FromMinutes(10), stoppingToken);
         }
     }
 }

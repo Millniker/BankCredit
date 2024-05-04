@@ -80,6 +80,74 @@ namespace ClassLibrary1.Migrations
                     b.ToTable("CreditRules");
                 });
 
+            modelBuilder.Entity("CreditService.DAL.Entities.HttpExchangeData", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("IdempotencyId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("RequestBody")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("RequestHeaders")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RequestMethod")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RequestPath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ResponseBody")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("ResponseCode")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ResponseHeaders")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HttpExchangeData");
+                });
+
+            modelBuilder.Entity("CreditService.DAL.Entities.IdempotencyId", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("HttpExchangeDataId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("IdempotencyKey")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("LockedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IdempotencyId");
+                });
+
             modelBuilder.Entity("CreditService.DAL.Entities.Loan", b =>
                 {
                     b.Property<Guid>("Id")

@@ -11,6 +11,8 @@ public class AppDbContext: DbContext
     
     public DbSet<LoanApp> LoanApp { get; set; }
     public DbSet<BillPayment> BillPayment { get; set; }
+    public DbSet<HttpExchangeData> HttpExchangeData { get; set; }
+    public DbSet<IdempotencyId> IdempotencyId { get; set; }
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
     
     protected override void OnModelCreating(ModelBuilder builder)
