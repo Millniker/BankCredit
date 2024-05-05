@@ -1,0 +1,5 @@
+/credit/BankCredit/CreditService.Common/bin/Debug/net7.0/linux-x64/publish/CreditService.Common.dll
+/credit/BankCredit/CreditService.Common/bin/Debug/net7.0/linux-x64/publish/CreditService.Common.deps.json
+/credit/BankCredit/CreditService.Common/bin/Debug/net7.0/linux-x64/publish/CreditService.Common.pdb
+/credit/BankCredit/CreditService.Common/bin/Debug/net7.0/linux-x64/publish/Microsoft.AspNetCore.OpenApi.dll
+/credit/BankCredit/CreditService.Common/bin/Debug/net7.0/linux-x64/publish/Microsoft.OpenApi.dll

@@ -1,0 +1,13 @@
+/credit/BankCredit/CreditService.DAL/bin/Debug/net7.0/linux-x64/publish/CreditService.DAL.dll
+/credit/BankCredit/CreditService.DAL/bin/Debug/net7.0/linux-x64/publish/CreditService.DAL.runtimeconfig.json
+/credit/BankCredit/CreditService.DAL/bin/Debug/net7.0/linux-x64/publish/CreditService.DAL.pdb
+/credit/BankCredit/CreditService.DAL/bin/Debug/net7.0/linux-x64/publish/Microsoft.AspNetCore.OpenApi.dll
+/credit/BankCredit/CreditService.DAL/bin/Debug/net7.0/linux-x64/publish/Microsoft.EntityFrameworkCore.dll
+/credit/BankCredit/CreditService.DAL/bin/Debug/net7.0/linux-x64/publish/Microsoft.EntityFrameworkCore.Abstractions.dll
+/credit/BankCredit/CreditService.DAL/bin/Debug/net7.0/linux-x64/publish/Microsoft.EntityFrameworkCore.Relational.dll
+/credit/BankCredit/CreditService.DAL/bin/Debug/net7.0/linux-x64/publish/Microsoft.OpenApi.dll
+/credit/BankCredit/CreditService.DAL/bin/Debug/net7.0/linux-x64/publish/Npgsql.dll
+/credit/BankCredit/CreditService.DAL/bin/Debug/net7.0/linux-x64/publish/Npgsql.EntityFrameworkCore.PostgreSQL.dll
+/credit/BankCredit/CreditService.DAL/bin/Debug/net7.0/linux-x64/publish/CreditService.Common.dll
+/credit/BankCredit/CreditService.DAL/bin/Debug/net7.0/linux-x64/publish/CreditService.Common.pdb
+/credit/BankCredit/CreditService.DAL/bin/Debug/net7.0/linux-x64/publish/CreditService.DAL.deps.json

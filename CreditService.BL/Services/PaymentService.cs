@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using CreditService.BL.Http;
 using CreditService.Common.DTO;
 using CreditService.Common.DTO.Payment;
 using CreditService.Common.Exceptions;
@@ -23,7 +24,7 @@ public class PaymentService:IPaymentService
         _accountHttpClient = accountHttp;
     }
 
-    public async Task<Response> PaymentProcessing(SendPaymentDto paymentDto)
+    public async Task<Response> PaymentProcessing(SendPaymentDto paymentDto, string requestId,  string deviceId)
     {
         var loan = await _context.Loan.FindAsync(paymentDto.LoanId);
         var billPayment = await _context.BillPayment.FindAsync(paymentDto.BillPaymentId);
@@ -58,7 +59,7 @@ public class PaymentService:IPaymentService
         });
 
 
-        var account = await _accountHttpClient.GetAccount(paymentDto.AccountId);
+        var account = await _accountHttpClient.GetAccount(paymentDto.AccountId, requestId,  deviceId);
         if (account is { Balance: 0 })
         {
             _context.BillPayment.Remove(billPayment);

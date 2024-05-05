@@ -1,5 +1,6 @@
 using CreditService.Common.DTO;
 using CreditService.Common.DTO.Payment;
+using CreditService.Common.Exceptions;
 using CreditService.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,8 +19,16 @@ public class PaymentController:ControllerBase
     
     [HttpPost("")]
     public async Task<ActionResult<string>> SendLoanApp(SendPaymentDto paymentDto)
-    {
-        await _paymentService.PaymentProcessing(paymentDto);
+    {        if (!HttpContext.Request.Headers.TryGetValue("RequestId", out var requestId))
+        {
+            throw new IncorrectDataException("не передан requestId");
+        }
+
+        if (!HttpContext.Request.Headers.TryGetValue("DeviceId", out var deviceId))
+        {
+            throw new IncorrectDataException("не передан deviceId");
+        }
+        await _paymentService.PaymentProcessing(paymentDto,  requestId,  deviceId);
 
         return Ok("Success");
     }

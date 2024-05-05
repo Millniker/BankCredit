@@ -1,4 +1,5 @@
-﻿using CreditService.BL.Services;
+﻿using CreditService.BL.Http;
+using CreditService.BL.Services;
 using CreditService.Common.Http;
 using CreditService.Common.Interfaces;
 using CreditService.DAL;
@@ -23,9 +24,11 @@ namespace CreditService.BL;
             builder.Services.AddScoped<IPaymentService, PaymentService>();
             builder.Services.AddHostedService<ScheduledTaskService>();
             builder.Services.AddScoped<PaymentCalculator>();
+            builder.Services.AddScoped<MetricHttp>();
             builder.Services.AddScoped<AccountHttp>();
             builder.Services.AddScoped<LoanServiceHttp>();
             builder.Services.AddScoped<LoggerService>();
+            builder.Services.AddScoped<RetryService>();
 
         }
         

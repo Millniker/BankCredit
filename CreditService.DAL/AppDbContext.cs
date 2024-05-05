@@ -1,4 +1,5 @@
 using CreditService.DAL.Entities;
+using CreditService.DAL.Enum;
 using Microsoft.EntityFrameworkCore;
 
 namespace CreditService.DAL;
@@ -13,6 +14,7 @@ public class AppDbContext: DbContext
     public DbSet<BillPayment> BillPayment { get; set; }
     public DbSet<HttpExchangeData> HttpExchangeData { get; set; }
     public DbSet<IdempotencyId> IdempotencyId { get; set; }
+    public DbSet<CircuitBreaker> CircuitBreaker { get; set; }
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
     
     protected override void OnModelCreating(ModelBuilder builder)
@@ -21,6 +23,10 @@ public class AppDbContext: DbContext
             builder.Entity<CreditRules>().OwnsOne(c => c.AmountMax);
             builder.Entity<CreditRules>().OwnsOne(c => c.AmountMin);
             builder.Entity<BillPayment>().OwnsOne(c => c.Amount);
+            builder.Entity<CircuitBreaker>(typeBuilder =>
+            {
+                typeBuilder.HasKey(x => x.Id);
+            });
             
         }
 }

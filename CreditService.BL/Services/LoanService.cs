@@ -1,19 +1,12 @@
-using System.Net;
-using System.Net.Http.Json;
-using System.Text;
+using CreditService.BL.Http;
 using CreditService.Common.DTO;
 using CreditService.Common.Exceptions;
 using CreditService.Common.Interfaces;
-using CreditService.Common.System;
 using CreditService.DAL;
 using CreditService.DAL.Entities;
 using CreditService.DAL.Enum;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using CreditService.Common.DTO.LoanAppDtos;
 using CreditService.Common.Http;
-using Newtonsoft.Json;
-using LoanResponse = CreditService.Common.DTO.LoanAppDtos.LoanResponse;
 
 namespace CreditService.BL.Services;
 
@@ -97,7 +90,7 @@ public class LoanService : ILoanService
         };
     }
 
-    public async Task<LoanResultResponse> SendLoanApp(int userId, ShortLoanAppDto sendLoanAppDto)
+    public async Task<LoanResultResponse> SendLoanApp(int userId, ShortLoanAppDto sendLoanAppDto, string requestId, string deviceId)
     {
         var creditRules = await _context.CreditRules.FindAsync(sendLoanAppDto.CreditRules);
 
@@ -106,7 +99,7 @@ public class LoanService : ILoanService
             throw new ItemNotFoundException($"Не найдены условия кредита с id={sendLoanAppDto.CreditRules}");
         }
 
-        var creditScore = await _loanHttpClient.getCreditScore(userId);
+        var creditScore = await _loanHttpClient.getCreditScore(userId, requestId, deviceId);
         var toDesicionDto = new ToDesicionDto
         {
             Amount = sendLoanAppDto.Amount,
@@ -142,11 +135,7 @@ public class LoanService : ILoanService
             Term = sendLoanAppDto.Term
         };
         
-        
-      
-
         await _context.LoanApp.AddAsync(loanAppEntity);
-
         loan.LoanAppId = loanAppEntity.Id;
         await _context.Loan.AddAsync(loan);
         loanAppEntity.LoanStatus = LoanStatusType.Approved;
@@ -173,7 +162,7 @@ public class LoanService : ILoanService
         };
         loanAppEntity.LoanStatus = LoanStatusType.Approved;
         loanAppEntity.Description = "Одобрен";
-        var accountCreateResponse = await LoanProcessing(loanResult);
+        var accountCreateResponse = await LoanProcessing(loanResult, requestId, deviceId);
         loan.AccountId = accountCreateResponse.AccountId;
         _context.Loan.Attach(loan);
         _context.Entry(loan).State = EntityState.Modified;
@@ -192,7 +181,7 @@ public class LoanService : ILoanService
 
     }
 
-    public async Task<AccountCreateResponse> LoanProcessing(AnsLoanAppDto loanApp)
+    public async Task<AccountCreateResponse> LoanProcessing(AnsLoanAppDto loanApp, string requestId, string deviceId)
     {
         var createAccountDTO = new CreateAccountDto
         {
@@ -203,7 +192,7 @@ public class LoanService : ILoanService
         };
 
 
-        var accountResponse = await _accountHttpClient.openAccount(loanApp.UserId, createAccountDTO);
+        var accountResponse = await _accountHttpClient.OpenAccount(loanApp.UserId, createAccountDTO,  requestId,  deviceId);
         return accountResponse;
     }
 }

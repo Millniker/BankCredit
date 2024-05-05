@@ -1,0 +1,13 @@
+/credit/BankCredit/CreditService.Common/bin/Debug/net7.0/linux-x64/CreditService.Common.deps.json
+/credit/BankCredit/CreditService.Common/bin/Debug/net7.0/linux-x64/CreditService.Common.dll
+/credit/BankCredit/CreditService.Common/bin/Debug/net7.0/linux-x64/CreditService.Common.pdb
+/credit/BankCredit/CreditService.Common/obj/Debug/net7.0/linux-x64/CreditService.Common.csproj.AssemblyReference.cache
+/credit/BankCredit/CreditService.Common/obj/Debug/net7.0/linux-x64/CreditService.Common.GeneratedMSBuildEditorConfig.editorconfig
+/credit/BankCredit/CreditService.Common/obj/Debug/net7.0/linux-x64/CreditService.Common.AssemblyInfoInputs.cache
+/credit/BankCredit/CreditService.Common/obj/Debug/net7.0/linux-x64/CreditService.Common.AssemblyInfo.cs
+/credit/BankCredit/CreditService.Common/obj/Debug/net7.0/linux-x64/CreditService.Common.csproj.CoreCompileInputs.cache
+/credit/BankCredit/CreditService.Common/obj/Debug/net7.0/linux-x64/CreditService.Common.sourcelink.json
+/credit/BankCredit/CreditService.Common/obj/Debug/net7.0/linux-x64/CreditService.Common.dll
+/credit/BankCredit/CreditService.Common/obj/Debug/net7.0/linux-x64/refint/CreditService.Common.dll
+/credit/BankCredit/CreditService.Common/obj/Debug/net7.0/linux-x64/CreditService.Common.pdb
+/credit/BankCredit/CreditService.Common/obj/Debug/net7.0/linux-x64/ref/CreditService.Common.dll

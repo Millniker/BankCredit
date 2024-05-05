@@ -1,4 +1,6 @@
+using CreditService.BL.Services;
 using CreditService.Common.DTO;
+using CreditService.Common.Exceptions;
 using CreditService.Common.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +11,13 @@ namespace WebApplication1.Controllers;
 public class LoanAppController:ControllerBase
 {
     private readonly ILoanService _loanService;
+    private readonly LoggerService _logger;
 
-    public LoanAppController(ILoanService loanService)
+
+    public LoanAppController(ILoanService loanService, LoggerService logger)
     {
         _loanService = loanService;
+        _logger = logger;
     }
 
     [HttpGet("loanApp/{userId}/all")]
@@ -39,8 +44,19 @@ public class LoanAppController:ControllerBase
     [HttpPost("send/{userId}")]
     public async Task<ActionResult<LoanResultResponse>> SendLoanApp(int userId, ShortLoanAppDto sendLoanAppDto)
     {
-        var ansLoanAppDto = await _loanService.SendLoanApp(userId,sendLoanAppDto);
-        
+        if (!HttpContext.Request.Headers.TryGetValue("RequestId", out var requestId))
+        {
+            throw new IncorrectDataException("не передан requestId");
+        }
+
+        if (!HttpContext.Request.Headers.TryGetValue("DeviceId", out var deviceId))
+        {
+            throw new IncorrectDataException("не передан deviceId");
+        }
+        var http = HttpContext;
+
+        var ansLoanAppDto = await _loanService.SendLoanApp(userId,sendLoanAppDto, requestId, deviceId);
+        _logger.Log(http);
         return Ok(ansLoanAppDto);
     }
 

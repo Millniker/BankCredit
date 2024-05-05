@@ -52,6 +52,33 @@ namespace ClassLibrary1.Migrations
                     b.ToTable("BillPayment");
                 });
 
+            modelBuilder.Entity("CreditService.DAL.Entities.CircuitBreaker", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("CircuitBreakerStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ErrorCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("OpenTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("RequestCount")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CircuitBreaker");
+                });
+
             modelBuilder.Entity("CreditService.DAL.Entities.CreditRules", b =>
                 {
                     b.Property<Guid>("Id")

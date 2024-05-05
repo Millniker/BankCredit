@@ -1,3 +1,4 @@
+using CreditService.BL.Http;
 using CreditService.BL.Services;
 using CreditService.Common.DTO;
 using CreditService.Common.Interfaces;
@@ -15,11 +16,13 @@ public class CreditController:ControllerBase
 
     private readonly ICreditService _creditService;
     private readonly LoggerService _logger;
+    private readonly MetricHttp _metric;
 
-    public CreditController(ICreditService creditService,LoggerService logger)
+    public CreditController(ICreditService creditService,LoggerService logger, MetricHttp metric)
     {
         _creditService = creditService;
         _logger = logger;
+        _metric = metric;
         
     }
     
@@ -27,7 +30,6 @@ public class CreditController:ControllerBase
     public async Task<ActionResult<List<CreditDto>>> GetAllCreditRules()
     {
         var creditRules = await _creditService.GetAllCreditRules();
-
         return Ok(creditRules);
     }
     [HttpGet("{id}")]

@@ -21,7 +21,9 @@ public class ScheduledTaskService : BackgroundService
                 Console.WriteLine("Пошла возьня");
                 using var scope = _serviceProvider.CreateScope();
                 var taskService = scope.ServiceProvider.GetRequiredService<PaymentCalculator>(); 
+                var circusService = scope.ServiceProvider.GetRequiredService<RetryService>(); 
                 await taskService.UpdatePaymentStatusAsync();
+                await circusService.ChangStatus();
                                
             }
             catch (Exception ex)
@@ -29,7 +31,7 @@ public class ScheduledTaskService : BackgroundService
                 Console.WriteLine($"An error occurred while executing the scheduled task: {ex.Message}");
             }
 
-            await Task.Delay(TimeSpan.FromMinutes(10), stoppingToken);
+            await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
         }
     }
 }

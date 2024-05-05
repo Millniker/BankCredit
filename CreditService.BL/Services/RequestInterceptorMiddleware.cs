@@ -20,15 +20,15 @@ public class RequestInterceptorMiddleware
 
     public async Task Invoke(HttpContext context)
     {
-        if (context.Request.Headers.ContainsKey("RequestId"))
+        if (context.Request.Headers.ContainsKey("RequestId") && context.Request.Method == "POST")
         {
             using (var scope = _serviceProvider.CreateScope())
             {
                 // Получаем идентификатор запроса (RequestId) из заголовка
                 var requestId = context.Request.Headers["RequestId"];
                 AppDbContext _dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-                var iId = Guid.Parse(requestId);
-                var exchangeData = await _dbContext.IdempotencyId.Where(x => x.IdempotencyKey == iId.ToString()).FirstOrDefaultAsync();
+                var exchangeData = await _dbContext.IdempotencyId.Where(x => x.IdempotencyKey == requestId.ToString()).FirstOrDefaultAsync();
+                
                 if (exchangeData != null)
                 {
                 var http = await _dbContext.HttpExchangeData.Where(x => x.Id == exchangeData.HttpExchangeDataId).FirstAsync();
@@ -52,8 +52,15 @@ public class RequestInterceptorMiddleware
                     context.Response.ContentType = "application/json";
                     await context.Response.WriteAsync(jsonResponse);
                 }
+                }else
+                {
+                    await _next(context);
                 }
+               
             }
+        } else
+        {
+            await _next(context);
         }
     }
 
