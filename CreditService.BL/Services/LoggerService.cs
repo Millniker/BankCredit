@@ -23,8 +23,8 @@ public class LoggerService
             Id = Guid.NewGuid(),
             IdempotencyId = Guid.Parse(requestId),
             RequestDate = DateTime.UtcNow,
-            ResponseCode = 200,
-            ResponseBody = "Success",
+            ResponseCode = context.Response.StatusCode,
+            ResponseBody = await GetResponseBody(context),
             RequestPath = context.Request.Path,
             RequestMethod = context.Request.Method,
             RequestBody = await GetRequestBody(context),
@@ -46,16 +46,20 @@ public class LoggerService
     }
     private async Task<string> GetRequestBody(HttpContext context)
     {
-        // Получение тела запроса
         using (var reader = new StreamReader(context.Request.Body, Encoding.UTF8))
         {
             return await reader.ReadToEndAsync();
         }
     }
-
+    private async Task<string> GetResponseBody(HttpContext context)
+    {
+        using (var reader = new StreamReader(context.Response.Body, Encoding.UTF8))
+        {
+            return await reader.ReadToEndAsync();
+        }
+    }
     private string GetRequestHeaders(HttpContext context)
     {
-        // Получение заголовков запроса
         var headers = context.Request.Headers;
         StringBuilder headersString = new StringBuilder();
 
@@ -68,7 +72,6 @@ public class LoggerService
     }
     private string GetResponseHeaders(HttpContext context)
     {
-        // Получение заголовков запроса
         var headers = context.Response.Headers;
         StringBuilder headersString = new StringBuilder();
 

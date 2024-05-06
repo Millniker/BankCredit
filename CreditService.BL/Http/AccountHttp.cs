@@ -97,11 +97,53 @@ public class AccountHttp
         
     }
 
-    public async Task<bool> DeleteAccount(int accountId)
-    {
+    public async Task<bool> DeleteAccount(int accountId, string requestId, string deviceId)
+    { var circuc =await _context.CircuitBreaker.FirstOrDefaultAsync();
+        while (circuc.CircuitBreakerStatus != CircuitBreakerStatus.Open)
+        {
+            try
+            {
+                if (circuc.CircuitBreakerStatus == CircuitBreakerStatus.HalfOpen && new Random().Next(0, 2) == 0)
+                {
+                    var requestMessage = new HttpRequestMessage(HttpMethod.Delete,
+                        ApiConstants.CloseAccountBaseUrl + "/" + accountId);
+                    requestMessage.Headers.Add("RequestId", requestId);
+                    requestMessage.Headers.Add("DeviceId", deviceId);
+                    var response = await _httpClient.SendAsync(requestMessage);
+                    if (response.StatusCode != HttpStatusCode.OK)
+                        throw new FaildToLoadException("Не удалось закрыть счет" +
+                                                       response.Content.ReadAsStringAsync().Result);
+                    await _retryService.AddRequest();
+
+                    return response.IsSuccessStatusCode;
+                }
+                
+                if (circuc.CircuitBreakerStatus == CircuitBreakerStatus.Closed)
+                {
+                    var requestMessage = new HttpRequestMessage(HttpMethod.Delete,
+                        ApiConstants.CloseAccountBaseUrl + "/" + accountId);
+                    requestMessage.Headers.Add("RequestId", requestId);
+                    requestMessage.Headers.Add("DeviceId", deviceId);
+                    var response = await _httpClient.SendAsync(requestMessage);
+                    if (response.StatusCode != HttpStatusCode.OK)
+                        throw new FaildToLoadException("Не удалось закрыть счет" +
+                                                       response.Content.ReadAsStringAsync().Result);
+                    await _retryService.AddRequest();
+
+                    return response.IsSuccessStatusCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                await _retryService.AddException();
+            }
+            finally
+            {
+                await _retryService.ChangStatus();            }
+        }
+        throw new FaildToLoadException("Не удалось открыть счет");
         
-        var closeAccount =  await _httpClient.DeleteAsync(ApiConstants.CloseAccountBaseUrl+"/"+ accountId);
-        return closeAccount.IsSuccessStatusCode;
+      
     }
     public async Task<object> DepositMoney(WithdrawDepositDTO requestBody)
     {
@@ -158,8 +200,6 @@ public class AccountHttp
     
     private int GenerateTransactionId()
     {
-        // Здесь реализуй генерацию уникального идентификатора для транзакции
-        // Например, можешь использовать Guid.NewGuid().ToString() для простой генерации
         return new Random().Next(1000000, 9999999); // Пример простой генерации
     }
     public async Task<object> WithdrowMoney(WithdrawDepositDTO requestBody) 

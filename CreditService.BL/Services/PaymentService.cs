@@ -66,7 +66,7 @@ public class PaymentService:IPaymentService
             _context.Loan.Remove(loan);
             await _context.SaveChangesAsync();
            
-            if (! await _accountHttpClient.DeleteAccount(paymentDto.AccountId))
+            if (! await _accountHttpClient.DeleteAccount(paymentDto.AccountId, requestId, requestId))
             {
                 return new Response
                 {

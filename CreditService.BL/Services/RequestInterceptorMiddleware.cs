@@ -24,7 +24,6 @@ public class RequestInterceptorMiddleware
         {
             using (var scope = _serviceProvider.CreateScope())
             {
-                // Получаем идентификатор запроса (RequestId) из заголовка
                 var requestId = context.Request.Headers["RequestId"];
                 AppDbContext _dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
                 var exchangeData = await _dbContext.IdempotencyId.Where(x => x.IdempotencyKey == requestId.ToString()).FirstOrDefaultAsync();

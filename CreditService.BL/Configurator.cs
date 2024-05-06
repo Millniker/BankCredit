@@ -2,6 +2,7 @@
 using CreditService.BL.Services;
 using CreditService.Common.Http;
 using CreditService.Common.Interfaces;
+using CreditService.Common.System;
 using CreditService.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -24,11 +25,11 @@ namespace CreditService.BL;
             builder.Services.AddScoped<IPaymentService, PaymentService>();
             builder.Services.AddHostedService<ScheduledTaskService>();
             builder.Services.AddScoped<PaymentCalculator>();
-            builder.Services.AddScoped<MetricHttp>();
             builder.Services.AddScoped<AccountHttp>();
             builder.Services.AddScoped<LoanServiceHttp>();
             builder.Services.AddScoped<LoggerService>();
             builder.Services.AddScoped<RetryService>();
+            builder.Services.AddScoped<ThrowException>();
 
         }
         

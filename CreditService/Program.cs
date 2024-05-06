@@ -24,6 +24,7 @@ app.UseSwaggerUI();
 
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<RequestInterceptorMiddleware>();
+app.UseMiddleware<MetricMiddleware>();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
