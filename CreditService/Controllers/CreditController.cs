@@ -29,6 +29,15 @@ public class CreditController:ControllerBase
     [HttpGet("all")]
     public async Task<ActionResult<List<CreditDto>>> GetAllCreditRules()
     {
+        await _metric.SendMetric(new MetricDto
+        {
+            ActionName = "Credit",
+            Code = "200",
+            Message = "Ok", 
+            DeviceId= "your_device_id",
+            StartTime =DateTimeOffset.Now,
+            EndTime = DateTimeOffset.Now
+        });
         var creditRules = await _creditService.GetAllCreditRules();
         return Ok(creditRules);
     }
